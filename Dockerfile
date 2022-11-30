@@ -1,6 +1,6 @@
 FROM ghcr.io/praekeltfoundation/python-base-nw:3.10-bullseye
 
-COPY sync.py /app/
+COPY . /app
 
 WORKDIR /app
 
