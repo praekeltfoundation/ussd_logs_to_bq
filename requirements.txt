@@ -1,0 +1,3 @@
+rapidpro-python==2.6.1
+google-cloud-bigquery
+sentry-sdk==1.11.0
