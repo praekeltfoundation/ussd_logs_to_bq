@@ -90,7 +90,9 @@ def parse_ussd_log_line(line):
     match = re.findall(r"Loaded user: (.*)", line)
     if match:
         # data = json.loads(match[0].replace("\\", ""))
-        data = json.loads(match[0].encode("utf-8").decode("unicode_escape"))
+        data = json.loads(
+            match[0].encode("utf-8").decode("unicode_escape"), strict=False
+        )
         addr = data["addr"].lstrip("+")
         addr = f"+{addr}"
         data["addr"] = hash_string(addr)
