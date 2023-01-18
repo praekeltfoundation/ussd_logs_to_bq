@@ -4,6 +4,7 @@ import json
 import os
 import re
 from datetime import datetime, timedelta
+from json.decoder import JSONDecodeError
 from urllib.parse import urljoin
 
 import requests
@@ -79,20 +80,27 @@ def logs_from_response(resp):
     for result in resp.json()["data"]["result"]:
         for ts, stream in result["values"]:
             log_line = json.loads(stream)["log"]
-            logs.append(
-                (datetime.fromtimestamp(int(ts) / 1e9), parse_ussd_log_line(log_line))
-            )
+            parsed_log_line = parse_ussd_log_line(log_line)
+            if parsed_log_line:
+                logs.append((datetime.fromtimestamp(int(ts) / 1e9), parsed_log_line))
     print("Logs: ", len(logs))
     return logs
 
 
 def parse_ussd_log_line(line):
+    if "Unable to format event" in line:
+        # We won't be able to parse these
+        return
     match = re.findall(r"Loaded user: (.*)", line)
     if match:
         # data = json.loads(match[0].replace("\\", ""))
-        data = json.loads(
-            match[0].encode("utf-8").decode("unicode_escape"), strict=False
-        )
+        try:
+            data = json.loads(
+                match[0].encode("utf-8").decode("unicode_escape"), strict=False
+            )
+        except JSONDecodeError:
+            return
+
         addr = data["addr"].lstrip("+")
         addr = f"+{addr}"
         data["addr"] = hash_string(addr)
