@@ -79,7 +79,10 @@ def logs_from_response(resp):
     logs = []
     for result in resp.json()["data"]["result"]:
         for ts, stream in result["values"]:
-            log_line = json.loads(stream)["log"]
+            log_line = stream
+            # Some json logs are being parsed automatically.
+            if type(stream) is dict:
+                log_line = stream["log"]
             parsed_log_line = parse_ussd_log_line(log_line)
             if parsed_log_line:
                 logs.append((datetime.fromtimestamp(int(ts) / 1e9), parsed_log_line))
@@ -131,7 +134,6 @@ def get_last_record(table, field):
 
 
 def upload_to_bigquery(table, data, fields):
-
     schema = [
         bigquery.SchemaField(field, data_type) for field, data_type in fields.items()
     ]
