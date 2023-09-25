@@ -134,7 +134,6 @@ def get_last_record(table, field):
 
 
 def upload_to_bigquery(table, data, fields):
-
     schema = [
         bigquery.SchemaField(field, data_type) for field, data_type in fields.items()
     ]
