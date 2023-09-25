@@ -1,0 +1,59 @@
+{
+  "status": "success",
+  "data": {
+    "resultType": "streams",
+    "result": [
+      {
+        "stream": {
+          "filename": "/var/log/pods/healthcheck-ussd_ussd-db9bfdd69-5nhm6_5b65fe34-a779-41ca-adc9-dfbecee60536/ussd/0.log",
+          "job": "healthcheck-ussd/ussd",
+          "namespace": "healthcheck-ussd",
+          "node_name": "nodea",
+          "pod": "ussd-db9bfdd69-5nhm6",
+          "app": "ussd",
+          "container": "ussd"
+        },
+        "values": [
+          [
+            "1694602104731128773",
+            {
+              "log": "2023-09-13T10:48:24+0000 [-] Loaded user: {\"addr\":\"REDACTED\",\"lang\":\"sot\",\"answers\":{\"returning_user\":false,\"activation\":null,\"state_welcome\":\"state_send_privacy_policy_sms\",\"state_privacy_policy_accepted\":\"state_core_language\",\"state_core_language\":\"sot\",\"state_language\":\"sot\",\"state_age\":\"40-65\",\"state_gender\":\"female\"},\"metadata\":{},\"in_session\":true,\"state\":{\"name\":\"state_province\",\"metadata\":{},\"creator_opts\":{}}}\n",
+              "stream": "stdout",
+              "time": "2023-09-13T10:48:24.688588859Z"
+            }
+          ],
+          [
+            "1694602085164329385",
+            {
+              "log": "2023-09-13T10:48:05+0000 [-] Loaded user: {\"addr\":\"REDACTED\",\"lang\":\"sot\",\"answers\":{\"returning_user\":false,\"activation\":null,\"state_welcome\":\"state_send_privacy_policy_sms\",\"state_privacy_policy_accepted\":\"state_core_language\",\"state_core_language\":\"sot\",\"state_language\":\"sot\",\"state_age\":\"40-65\"},\"metadata\":{},\"in_session\":true,\"state\":{\"name\":\"state_gender\",\"metadata\":{},\"creator_opts\":{}}}\n",
+              "stream": "stdout",
+              "time": "2023-09-13T10:48:05.007810238Z"
+            }
+          ]
+        ]
+      },
+      {
+        "stream": {
+          "node_name": "nodeb",
+          "pod": "ussd-db9bfdd69-b56kh",
+          "stream": "stdout",
+          "app": "ussd",
+          "container": "ussd",
+          "filename": "/var/log/pods/healthcheck-ussd_ussd-db9bfdd69-b56kh_128b1d19-f2b2-4960-ba7d-78b9de7d3c1d/ussd/0.log",
+          "job": "healthcheck-ussd/ussd",
+          "namespace": "healthcheck-ussd"
+        },
+        "values": [
+          [
+            "1694604405022294485",
+            "2023-09-13T11:26:45+0000 [-] Loaded user: {\"addr\":\"REDACTED\",\"lang\":null,\"answers\":{\"returning_user\":false,\"activation\":null},\"metadata\":{},\"in_session\":true,\"state\":{\"name\":\"state_welcome\",\"metadata\":{},\"creator_opts\":{}}}"
+          ],
+          [
+            "1694604115878112683",
+            "2023-09-13T11:21:55+0000 [-] Loaded user: {\"addr\":\"REDACTED\",\"lang\":\"zul\",\"answers\":{\"returning_user\":false,\"activation\":null,\"state_welcome\":\"state_send_privacy_policy_sms\",\"state_privacy_policy_accepted\":\"state_core_language\",\"state_core_language\":\"zul\",\"state_language\":\"zul\"},\"metadata\":{},\"in_session\":true,\"state\":{\"name\":\"state_age\",\"metadata\":{},\"creator_opts\":{}}}"
+          ]
+        ]
+      }
+    ]
+  }
+}

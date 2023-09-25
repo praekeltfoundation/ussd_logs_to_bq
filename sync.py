@@ -78,7 +78,10 @@ def logs_from_response(resp):
     logs = []
     for result in resp.json()["data"]["result"]:
         for ts, stream in result["values"]:
-            log_line = json.loads(stream)["log"]
+            log_line = stream
+            # Some json logs are being parsed automatically.
+            if type(stream) is dict:
+                log_line = stream["log"]
             logs.append(
                 (datetime.fromtimestamp(int(ts) / 1e9), parse_ussd_log_line(log_line))
             )
@@ -89,7 +92,6 @@ def logs_from_response(resp):
 def parse_ussd_log_line(line):
     match = re.findall(r"Loaded user: (.*)", line)
     if match:
-        # data = json.loads(match[0].replace("\\", ""))
         data = json.loads(match[0].encode("utf-8").decode("unicode_escape"))
         addr = data["addr"].lstrip("+")
         addr = f"+{addr}"
@@ -121,7 +123,6 @@ def get_last_record(table, field):
 
 
 def upload_to_bigquery(table, data, fields):
-
     schema = [
         bigquery.SchemaField(field, data_type) for field, data_type in fields.items()
     ]
